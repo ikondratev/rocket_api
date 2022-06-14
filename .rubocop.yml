@@ -3,7 +3,7 @@ AllCops:
     - Gemfile
     - test/*
     - Rakefile
-    - smpl_prflr.gemspec
+    - rocket_api.gemspec
     - bin/*
 
 Style/FrozenStringLiteralComment:
