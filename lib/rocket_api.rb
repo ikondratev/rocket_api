@@ -1,1 +1,1 @@
-class RocketApi; end
+module RocketApi; end
