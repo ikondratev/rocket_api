@@ -1,0 +1,10 @@
+#!/usr/bin/env ruby
+
+command = ARGV[0]
+
+case command.to_sym
+when :start
+  system 'mkdir', '-p', 'foo/bar'
+else
+  puts "Wrong command"
+end
