@@ -65,3 +65,6 @@ Style/ExplicitBlockArgument:
 
 Style/RedundantFreeze:
   Enabled: false
+
+Style/RedundantInterpolation:
+  Enabled: false

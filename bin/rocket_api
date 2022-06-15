@@ -1,10 +1,19 @@
 #!/usr/bin/env ruby
 
+require './rocket_api/dir_commands'
+require './rocket_api/files_commands'
+
 command = ARGV[0]
+
+DIRS = %w[bin app config log test].freeze
 
 case command.to_sym
 when :start
-  system 'mkdir', '-p', 'foo/bar'
+  DIRS.each do |dir_name|
+    RocketApi::DirCommands.create_dir(dir_name)
+  end
+
+  RocketApi::FilesCommands.init_config
 else
   puts "Wrong command"
 end
