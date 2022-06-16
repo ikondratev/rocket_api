@@ -1,19 +1,23 @@
 #!/usr/bin/env ruby
 
-require './rocket_api/dir_commands'
-require './rocket_api/files_commands'
+require './rocket_api/rocket_commands'
+require './rocket_api/constants'
 
-command = ARGV[0]
+base_command = ARGV[0]
+sub_command = ARGV[1]
+project_name = ARGV[2]
 
-DIRS = %w[bin app config log test].freeze
-
-case command.to_sym
-when :start
-  DIRS.each do |dir_name|
-    RocketApi::DirCommands.create_dir(dir_name)
+case base_command
+when RocketApi::INIT
+  case sub_command
+  when RocketApi::BASE
+    #  TODO: implement me
+  when RocketApi::GEM
+    RocketApi::RocketCommands.init_gem_dir
+    RocketApi::RocketCommands.init_gem_files project_name&.downcase
+  else
+    puts "Wrong command"
   end
-
-  RocketApi::FilesCommands.init_config
 else
   puts "Wrong command"
 end
