@@ -1,6 +1,10 @@
 module RocketApi
   module Library
     module GemRepoPlainText
+      def gitignore_text
+        ".idea/\nGemfile.lock\n*.gem".freeze
+      end
+
       def plain_version_text(module_name)
         "module #{module_name}\n\tVERSION = \"0.0.1\".freeze\nend"
       end
