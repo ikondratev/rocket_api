@@ -1,8 +1,6 @@
 #!/usr/bin/env ruby
 
-require './lib/rocket_api/rocket_commands'
-require './lib/rocket_api/constants'
-require './lib/rocket_api/errors'
+require "rocket_api"
 
 base_command = ARGV[0]
 sub_command = ARGV[1]

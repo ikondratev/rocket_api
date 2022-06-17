@@ -1,9 +1,3 @@
-require './lib/rocket_api/constants'
-require './lib/rocket_api/commands/files'
-require './lib/rocket_api/commands/dirs'
-require './lib/rocket_api/library/gem_repo_plain_text'
-require './lib/rocket_api/commands/gems_dir'
-
 module RocketApi
   class RocketCommands
     extend RocketApi::Commands::Files
