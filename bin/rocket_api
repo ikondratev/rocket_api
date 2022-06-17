@@ -2,6 +2,7 @@
 
 require './rocket_api/rocket_commands'
 require './rocket_api/constants'
+require './rocket_api/errors'
 
 base_command = ARGV[0]
 sub_command = ARGV[1]
@@ -13,8 +14,12 @@ when RocketApi::INIT
   when RocketApi::BASE
     #  TODO: implement me
   when RocketApi::GEM
-    RocketApi::RocketCommands.init_gem_dir
-    RocketApi::RocketCommands.init_gem_files project_name&.downcase
+    begin
+      RocketApi::RocketCommands.init_gem_dir
+      RocketApi::RocketCommands.init_gem_files project_name&.downcase
+    rescue RocketApi::Error  => e
+      puts "Init directory error: #{e.message}"
+    end
   else
     puts RocketApi::WRONG_ANSWER
   end

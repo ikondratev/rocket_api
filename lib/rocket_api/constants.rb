@@ -1,6 +1,7 @@
 module RocketApi
+  # ...
+  # Dirs map
   GEM_PROJECTS_DIR = %w[bin lib test].freeze
-
   # ...
   # Ping
   PONG = "PONG".freeze

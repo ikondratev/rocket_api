@@ -71,3 +71,6 @@ Style/RedundantInterpolation:
 
 Style/NumericLiteralPrefix:
   Enabled: false
+
+Layout/EmptyLineBetweenDefs:
+  Enabled: false
