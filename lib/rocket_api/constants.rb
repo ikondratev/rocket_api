@@ -1,16 +1,15 @@
 module RocketApi
-  # ...
   # Dirs map
   GEM_PROJECTS_DIR = %w[bin lib test].freeze
-  # ...
+
   # Ping
   PONG = "PONG".freeze
-  # ...
+
   # Commands
   INIT = "init".freeze
   BASE = "base".freeze
   GEM = "gem".freeze
-  # ...
+
   # Answers
   FOLDER_EXIST = "folder exist:".freeze
   FILE_EXIST = "file already exist:".freeze

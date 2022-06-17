@@ -1,7 +1,6 @@
 module RocketApi
   module Commands
     module Dirs
-      # ...
       # @param [Array] dirs
       def create_repo(dirs)
         dirs.each do |dir|
@@ -10,7 +9,7 @@ module RocketApi
           puts "#{CREATE_FAILED} #{e.message}"
         end
       end
-      # ...
+
       # @param [String] dir_name
       # ...
       # @raise [StandardError]

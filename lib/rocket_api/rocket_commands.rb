@@ -1,10 +1,12 @@
+require "rocket_api/rocket_commands"
+
 module RocketApi
   class RocketCommands
     extend RocketApi::Commands::Files
     extend RocketApi::Commands::Dirs
     extend RocketApi::Commands::GemsDir
     extend RocketApi::Library::GemRepoPlainText
-    # ...
+
     # @raise [RocketApi::CreateDirError]
     def self.init_gem_dir
       create_repo(RocketApi::GEM_PROJECTS_DIR)
@@ -12,7 +14,7 @@ module RocketApi
       raise RocketApi::CreateDirError,
             "#{RocketApi::CREATE_FAILED} #{e.message}"
     end
-    # ...
+
     # @param [String] project_name
     # ...
     # @raise [RocketApi::InitFilesError] error
