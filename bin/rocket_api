@@ -16,8 +16,8 @@ when RocketApi::INIT
     RocketApi::RocketCommands.init_gem_dir
     RocketApi::RocketCommands.init_gem_files project_name&.downcase
   else
-    puts "Wrong command"
+    puts RocketApi::WRONG_ANSWER
   end
 else
-  puts "Wrong command"
+  puts RocketApi::WRONG_ANSWER
 end

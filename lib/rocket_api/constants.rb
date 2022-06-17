@@ -1,9 +1,21 @@
 module RocketApi
-  BASE_DIRS = %w[bin app config log test].freeze
   GEM_PROJECTS_DIR = %w[bin lib test].freeze
+
+  # ...
+  # Ping
+  PONG = "PONG".freeze
   # ...
   # Commands
   INIT = "init".freeze
   BASE = "base".freeze
   GEM = "gem".freeze
+  # ...
+  # Answers
+  FOLDER_EXIST = "folder exist:".freeze
+  FILE_EXIST = "file already exist:".freeze
+  WRONG_ANSWER = "Wrong command".freeze
+  EMPTY_NAME = "Project name is empty".freeze
+  INIT_FAIL = "Init action fail:".freeze
+  CREATE_FAILED = "Create failed:".freeze
+  CREATE_SUCCESS = "Successfully created:".freeze
 end

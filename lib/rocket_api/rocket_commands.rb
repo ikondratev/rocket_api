@@ -1,25 +1,37 @@
 require './rocket_api/constants'
 require './rocket_api/commands/files'
 require './rocket_api/commands/dirs'
+require './rocket_api/library/gem_repo_plain_text'
 
 module RocketApi
   class RocketCommands
     extend RocketApi::Commands::Files
     extend RocketApi::Commands::Dirs
+    extend RocketApi::Library::GemRepoPlainText
 
     def self.init_gem_dir
       create_repo(RocketApi::GEM_PROJECTS_DIR)
     end
 
     def self.init_gem_files(project_name)
-      raise "Project name is empty" if project_name.nil?
+      raise RocketApi::EMPTY_NAME if project_name.nil?
 
+      init_bin!(project_name)
       init_gemspec!(project_name)
       init_main_file!(project_name)
       init_version!(project_name)
       init_gitignore!
     rescue StandardError => e
-      puts "Init action fail: #{e.message}"
+      puts "#{RocketApi::INIT_FAIL} #{e.message}"
+    end
+
+    def self.init_bin!(name)
+      dir_name = "bin/#{name}"
+      create_single_file(
+        dir_name,
+        "",
+        exe: true
+      )
     end
 
     def self.init_version!(name)
@@ -27,8 +39,10 @@ module RocketApi
       create_dir(dir_name)
 
       file_name = "#{dir_name}/version.rb"
-      text = "module #{class_name_camel(name)}\nVERSION = \"0.0.1\".freeze\nend"
-      create_single_file(file_name, text)
+      create_single_file(
+        file_name,
+        plain_version_text(class_name_camel(name))
+      )
     end
 
     def self.init_main_file!(name)
@@ -45,8 +59,10 @@ module RocketApi
 
     def self.init_gemspec!(name)
       file_name = "#{name}.gemspec"
-      text = "require '#{name}/version'"
-      create_single_file(file_name, text)
+      create_single_file(
+        file_name,
+        plain_gemspec_text(name, class_name_camel(name))
+      )
     end
   end
 end

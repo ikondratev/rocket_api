@@ -9,16 +9,17 @@ module RocketApi
         name.split('_').map(&:capitalize).join
       end
 
-      def self.create_single_file(name, text)
-        raise "file #{name} already exist" if is_exist?(name)
+      def create_single_file(name, text, **options)
+        raise "#{RocketApi::FILE_EXIST} #{name}" if is_exist?(name)
 
         out_file = File.new(name, "w")
+        out_file.chmod(001) if options[:exe]
         out_file.puts(text)
         out_file.close
 
-        puts "#{name} was successfully initialized"
+        puts "#{RocketApi::CREATE_SUCCESS} #{name}"
       rescue StandardError => e
-        puts "#{name}  wasn't initialized: #{e.message}"
+        puts "#{RocketApi::CREATE_FAILED} #{name} err: #{e.message}"
       end
     end
   end

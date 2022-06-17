@@ -68,3 +68,6 @@ Style/RedundantFreeze:
 
 Style/RedundantInterpolation:
   Enabled: false
+
+Style/NumericLiteralPrefix:
+  Enabled: false
