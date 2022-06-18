@@ -13,6 +13,8 @@ gem 'rubocop' '1.26'
 gem install rocket_api
 ```
 ## How it works:
-```sh
- rocket_api init gem name_gem
+```sh   
+ In working directory:
+ 
+ user@bulkas ~/gem/new_dir rocket_api init gem name_gem
 ```

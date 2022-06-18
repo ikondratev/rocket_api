@@ -16,7 +16,10 @@ module RocketApi
       def init_gems_main_file!(name)
         file_name = "lib/#{name}.rb"
         text = "class #{class_name_camel(name)}; end"
-        create_single_file(file_name, text)
+        create_single_file(
+          file_name,
+          text
+        )
       end
 
       # @param [String] name

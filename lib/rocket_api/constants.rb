@@ -11,6 +11,8 @@ module RocketApi
   GEM = "gem".freeze
 
   # Answers
+  INIT_DIR_ERROR = "Init directory error".freeze
+  GEM_DETECTED = "another one gem exist".freeze
   FOLDER_EXIST = "folder exist:".freeze
   FILE_EXIST = "file already exist:".freeze
   WRONG_ANSWER = "Wrong command".freeze

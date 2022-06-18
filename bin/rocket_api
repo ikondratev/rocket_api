@@ -3,7 +3,7 @@
 require "rocket_api"
 
 base_command = ARGV[0]
-sub_command = ARGV[1]
+sub_command  = ARGV[1]
 project_name = ARGV[2]
 
 case base_command
@@ -16,7 +16,7 @@ when RocketApi::INIT
       RocketApi::RocketCommands.init_gem_dir
       RocketApi::RocketCommands.init_gem_files project_name&.downcase
     rescue RocketApi::Error  => e
-      puts "Init directory error: #{e.message}"
+      puts "#{RocketApi::INIT_DIR_ERROR} #{e.message}"
     end
   else
     puts RocketApi::WRONG_ANSWER
