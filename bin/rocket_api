@@ -2,25 +2,27 @@
 
 require "rocket_api"
 
-base_command = ARGV[0]
-sub_command  = ARGV[1]
-project_name = ARGV[2]
+base_command = ARGV[0]&.gsub(RocketApi::REGEXP_VALID, '')&.downcase
+sub_command  = ARGV[1]&.gsub(RocketApi::REGEXP_VALID, '')&.downcase
+project_name = ARGV[2]&.gsub(RocketApi::REGEXP_VALID, '')&.downcase
 
-case base_command
-when RocketApi::INIT
-  case sub_command
-  when RocketApi::BASE
-    #  TODO: implement me
-  when RocketApi::GEM
-    begin
-      RocketApi::RocketCommands.init_gem_dir
-      RocketApi::RocketCommands.init_gem_files project_name&.downcase
-    rescue RocketApi::Error  => e
+if [base_command, sub_command, project_name].map(&:nil?).any?
+  puts RocketApi::WRONG_RESPONSE
+  return
+end
+
+case
+when RocketApi::AVAILABLE_COMMANDS.keys.include?(base_command&.to_sym)
+  if RocketApi::AVAILABLE_COMMANDS[base_command&.to_sym].keys.include?(sub_command&.to_sym)
+    RocketApi::AVAILABLE_COMMANDS[base_command&.to_sym][sub_command&.to_sym].each do |command|
+      RocketApi::RocketCommands.send(command, project_name: project_name)
+    rescue RocketApi::Error => e
       puts "#{RocketApi::INIT_DIR_ERROR} #{e.message}"
+      return
     end
   else
-    puts RocketApi::WRONG_ANSWER
+    puts RocketApi::WRONG_RESPONSE
   end
 else
-  puts RocketApi::WRONG_ANSWER
+  puts RocketApi::WRONG_RESPONSE
 end

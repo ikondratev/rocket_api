@@ -9,11 +9,11 @@ module RocketApi
     extend RocketApi::Commands::Files
     extend RocketApi::Commands::Dirs
     extend RocketApi::Commands::GemsDir
-    extend RocketApi::Library::GemRepoPlainText
     extend RocketApi::Commands::Helper
+    extend RocketApi::Library::GemRepoPlainText
 
     # @raise [RocketApi::CreateDirError]
-    def self.init_gem_dir
+    def self.init_gem_dir(**_options)
       raise GEM_DETECTED unless Dir.glob("*.gemspec").empty?
 
       create_repo(RocketApi::GEM_PROJECTS_DIR)
@@ -25,9 +25,10 @@ module RocketApi
     # @param [String] project_name
     # ...
     # @raise [RocketApi::InitFilesError] error
-    def self.init_gem_files(project_name)
-      raise RocketApi::EMPTY_NAME if project_name.nil?
+    def self.init_gem_files(**options)
+      raise RocketApi::EMPTY_NAME if options[:project_name].nil?
 
+      project_name = options[:project_name]
       init_bin!(project_name)
       init_gemspec!(project_name)
       init_gems_main_file!(project_name)
