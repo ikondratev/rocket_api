@@ -4,6 +4,7 @@ module RocketApi
 
   # Dirs map
   GEM_PROJECTS_DIR = %w[bin lib test].freeze
+  GEM_COMMANDS = %w[bin! gemspec! gems_main_file! gems_version! gem_test! rake_file! gitignore! gem_file!].freeze
   AVAILABLE_COMMANDS = {
     init: {
       gem: %w[init_gem_dir init_gem_files]
