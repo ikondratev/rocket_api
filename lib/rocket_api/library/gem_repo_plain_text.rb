@@ -32,6 +32,17 @@ module RocketApi
          "\ts.files = `git ls-files`.split($RS)",
          "end"].join("\n")
       end
+
+      def plain_gem_test_version_text(name, module_name)
+        ["require 'minitest/autorun'",
+         "require '#{name}/version'\n",
+         "class TestVersion < Minitest::Test",
+         "\tinclude #{module_name}\n",
+         "\tdef test_ping",
+         "\t\tassert_equal(\"0.0.1\", #{module_name}::VERSION)",
+         "\tend",
+         "end"].join("\n")
+      end
     end
   end
 end

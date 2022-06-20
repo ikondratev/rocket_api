@@ -13,10 +13,6 @@ module RocketApi
   # Ping
   PONG = "PONG".freeze
 
-  # Commands
-  BASE = "base".freeze
-  GEM = "gem".freeze
-
   # Answers
   INIT_DIR_ERROR = "Init directory error".freeze
   GEM_DETECTED = "another one gem exist".freeze
