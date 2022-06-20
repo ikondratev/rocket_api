@@ -12,6 +12,8 @@ module RocketApi
     extend RocketApi::Commands::Helper
     extend RocketApi::Library::GemRepoPlainText
 
+    # @param [Hah] options
+    # ...
     # @raise [RocketApi::CreateDirError]
     def self.init_gem_dir(**_options)
       raise GEM_DETECTED unless Dir.glob("*.gemspec").empty?
@@ -22,7 +24,7 @@ module RocketApi
             "#{RocketApi::CREATE_FAILED} #{e.message}"
     end
 
-    # @param [String] project_name
+    # @param [Hash] options
     # ...
     # @raise [RocketApi::InitFilesError] error
     def self.init_gem_files(**options)
@@ -33,6 +35,7 @@ module RocketApi
       init_gemspec!(project_name)
       init_gems_main_file!(project_name)
       init_gems_version!(project_name)
+      init_gem_test!(project_name)
       init_gitignore!
     rescue StandardError => e
       raise RocketApi::InitFilesError,
