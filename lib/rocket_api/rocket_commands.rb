@@ -3,6 +3,7 @@ require "rocket_api/commands/dirs"
 require "rocket_api/commands/gems_dir"
 require "rocket_api/commands/helper"
 require "rocket_api/library/gem_repo_plain_text"
+require "rocket_api/library/helper_plain_text"
 
 module RocketApi
   class RocketCommands
@@ -11,6 +12,7 @@ module RocketApi
     extend RocketApi::Commands::GemsDir
     extend RocketApi::Commands::Helper
     extend RocketApi::Library::GemRepoPlainText
+    extend RocketApi::Library::HelperPlainText
 
     # @param [Hah] options
     # ...
@@ -31,12 +33,7 @@ module RocketApi
       raise RocketApi::EMPTY_NAME if options[:project_name].nil?
 
       project_name = options[:project_name]
-      init_bin!(project_name)
-      init_gemspec!(project_name)
-      init_gems_main_file!(project_name)
-      init_gems_version!(project_name)
-      init_gem_test!(project_name)
-      init_gitignore!
+      RocketApi::GEM_COMMANDS.each { |command| send(command, project_name) }
     rescue StandardError => e
       raise RocketApi::InitFilesError,
             "#{RocketApi::INIT_FAIL} #{e.message}"

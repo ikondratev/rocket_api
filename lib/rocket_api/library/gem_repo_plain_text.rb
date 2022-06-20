@@ -30,6 +30,8 @@ module RocketApi
          "\ts.email = 'AUTHOR_MAIL'",
          "\ts.homepage = 'https://github.com/...'",
          "\ts.files = `git ls-files`.split($RS)",
+         "\ts.add_dependency \"rubocop\"",
+         "\ts.add_dependency \"rubocop-rake\"",
          "end"].join("\n")
       end
 
@@ -42,6 +44,12 @@ module RocketApi
          "\t\tassert_equal(\"0.0.1\", #{module_name}::VERSION)",
          "\tend",
          "end"].join("\n")
+      end
+
+      def gemfile_text
+        ["source 'https://rubygems.org/'",
+         "ruby 'RUBY_VERSION'",
+         "gemspec"].join("\n")
       end
     end
   end

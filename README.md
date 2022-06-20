@@ -14,7 +14,10 @@ gem install rocket_api
 ```
 ## How it works:
 ```sh   
+ Availble commands:
+ - init
+ - gem [ project_name ]
  In working directory:
  
- user@bulkas ~/gem/new_dir rocket_api init gem name_gem
+ user@bulkas ~/gem/new_dir rocket_api [ init ] [ gem ] [ project_name ]
 ```
