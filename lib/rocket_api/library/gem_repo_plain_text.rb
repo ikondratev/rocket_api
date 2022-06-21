@@ -5,10 +5,17 @@ module RocketApi
         ".idea/\nGemfile.lock\n*.gem".freeze
       end
 
+      # @param [String] module_name
+      #
+      # @return [String] text
       def plain_version_text(module_name)
         "module #{module_name}\n\tVERSION = \"0.0.1\".freeze\nend"
       end
 
+      # @param [String] name
+      # @param [String] module_name
+      #
+      # @return [String] text
       def plain_gemspec_text(name, module_name)
         ["lib = File.expand_path(\"lib\", __dir__)",
          "$LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)\n",
@@ -35,6 +42,10 @@ module RocketApi
          "end"].join("\n")
       end
 
+      # @param [String] name
+      # @param [String] module_name
+      #
+      # @return [String] text
       def plain_gem_test_version_text(name, module_name)
         ["require 'minitest/autorun'",
          "require '#{name}/version'\n",
@@ -46,10 +57,24 @@ module RocketApi
          "end"].join("\n")
       end
 
+      # @return [String] text
       def gemfile_text
         ["source 'https://rubygems.org/'",
          "ruby 'RUBY_VERSION'",
          "gemspec"].join("\n")
+      end
+
+      # @param [String] name
+      #
+      # @return [String] text
+      def plain_rubocop_yml_text(name)
+        ["AllCops:",
+         "\tExclude:",
+         "\t\t- Gemfile",
+         "\t\t- test/*",
+         "\t\t- Rakefile",
+         "\t\t- #{name}.gemspec",
+         "\t\t- bin/*"].join("\n")
       end
     end
   end
