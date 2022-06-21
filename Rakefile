@@ -2,12 +2,11 @@ require 'rubygems'
 require 'rake'
 
 desc "Run spec"
-task default: %i[test rubocop]
+task default: %i[spec rubocop]
 
-require 'rake/testtask'
-Rake::TestTask.new do |test|
-  test.libs << 'test'
-end
+require "bundler/gem_tasks"
+require "rspec/core/rake_task"
+RSpec::Core::RakeTask.new(:spec)
 
 require 'rubocop/rake_task'
 RuboCop::RakeTask.new do |task|

@@ -21,6 +21,8 @@ Gem::Specification.new do |s|
   s.email = "ilyafulleveline@gmail.com"
   s.homepage = "https://github.com/ikondratev/rocket_api"
   s.files = `git ls-files`.split($RS)
+  s.add_dependency "bundler", "~> 2"
   s.add_dependency "rubocop", "~> 1.26"
   s.add_dependency "rubocop-rake"
+  s.add_dependency "rspec", "~> 3.0"
 end
