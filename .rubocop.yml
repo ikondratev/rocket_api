@@ -5,6 +5,7 @@ AllCops:
     - Rakefile
     - rocket_api.gemspec
     - bin/*
+    - spec/**/**
 
 Style/FrozenStringLiteralComment:
   Enabled: false
