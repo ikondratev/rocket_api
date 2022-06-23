@@ -3,20 +3,24 @@ module RocketApi
   REGEXP_VALID = /[^0-9A-Za-z_-]/.freeze
   CHECK_APPS = %w[*.gemspec *.ru].freeze
 
-  # Dirs map
+  # Valid commands
+  COMMANDS = { init: "init", gem: "gem", rack: "rack" }.freeze
+
+  # Gem
   GEM_DIRS = %w[bin lib test].freeze
   GEM_FILES = %w[bin! gemspec! gems_main_file! gems_version! gem_test! rake_file! gitignore! gem_file! rubocop_yml!].freeze
+  GEM_MAP = { init_dirs: GEM_DIRS, init_files: GEM_FILES }.freeze
+
+  # Rack
   RACK_DIRS = %w[app config lib].freeze
+  RACK_FILES = %w[].freeze
+  RACK_MAP = { init_dirs: RACK_DIRS, init_files: RACK_FILES }.freeze
+
+  # Dirs map
   AVAILABLE_COMMANDS = {
-    init: {
-      gem: {
-        init_dirs: GEM_DIRS,
-        init_files: GEM_FILES
-      },
-      rack_app: {
-        init_dirs: RACK_DIRS,
-        init_files: []
-      }
+    COMMANDS[:init] => {
+      COMMANDS[:gem] => GEM_MAP,
+      COMMANDS[:rack] => RACK_MAP
     }
   }.freeze
 
