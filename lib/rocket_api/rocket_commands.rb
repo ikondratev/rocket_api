@@ -17,10 +17,10 @@ module RocketApi
     # @param [Hah] options
     # ...
     # @raise [RocketApi::CreateDirError]
-    def self.init_gem_dir(**_options)
-      raise GEM_DETECTED unless Dir.glob("*.gemspec").empty?
+    def self.init_dirs(**options)
+      raise APP_DETECTED unless CHECK_APPS.map { |p| Dir.glob(p) }.flatten.empty?
 
-      create_repo(RocketApi::GEM_PROJECTS_DIR)
+      create_repo(options[:collection])
     rescue StandardError => e
       raise RocketApi::CreateDirError,
             "#{RocketApi::CREATE_FAILED} #{e.message}"
@@ -29,11 +29,11 @@ module RocketApi
     # @param [Hash] options
     # ...
     # @raise [RocketApi::InitFilesError] error
-    def self.init_gem_files(**options)
+    def self.init_files(**options)
       raise RocketApi::EMPTY_NAME if options[:project_name].nil?
 
       project_name = options[:project_name]
-      RocketApi::GEM_COMMANDS.each { |command| send(command, project_name) }
+      options[:collection].each { |command| send(command, project_name) }
     rescue StandardError => e
       raise RocketApi::InitFilesError,
             "#{RocketApi::INIT_FAIL} #{e.message}"

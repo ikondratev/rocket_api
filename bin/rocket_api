@@ -12,10 +12,10 @@ if [base_command, sub_command, project_name].map(&:nil?).any?
 end
 
 case
-when RocketApi::AVAILABLE_COMMANDS.keys.include?(base_command&.to_sym)
-  if RocketApi::AVAILABLE_COMMANDS[base_command&.to_sym].keys.include?(sub_command&.to_sym)
-    RocketApi::AVAILABLE_COMMANDS[base_command&.to_sym][sub_command&.to_sym].each do |command|
-      RocketApi::RocketCommands.send(command, project_name: project_name)
+when RocketApi::AVAILABLE_COMMANDS.keys.include?(base_command)
+  if RocketApi::AVAILABLE_COMMANDS[base_command].keys.include?(sub_command)
+    RocketApi::AVAILABLE_COMMANDS[base_command][sub_command].each do |key, collection|
+      RocketApi::RocketCommands.send(key, collection: collection, project_name: project_name )
     rescue RocketApi::Error => e
       puts "#{RocketApi::INIT_DIR_ERROR} #{e.message}"
       return
