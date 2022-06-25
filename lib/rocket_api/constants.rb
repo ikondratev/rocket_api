@@ -12,8 +12,8 @@ module RocketApi
   GEM_MAP = { init_dirs: GEM_DIRS, init_files: GEM_FILES }.freeze
 
   # Rack
-  RACK_DIRS = %w[app config lib].freeze
-  RACK_FILES = %w[].freeze
+  RACK_DIRS = %w[app config test].freeze
+  RACK_FILES = %w[rack_routes! rack_base_controller! rack_config_ru! gitignore! rack_app! rack_router! rack_initializers! rack_application! rack_gemfile!].freeze
   RACK_MAP = { init_dirs: RACK_DIRS, init_files: RACK_FILES }.freeze
 
   # Dirs map
@@ -29,7 +29,7 @@ module RocketApi
 
   # Answers
   INIT_DIR_ERROR = "Init directory error".freeze
-  APP_DETECTED = "another one app exist".freeze
+  APP_DETECTED = "Another one app exist".freeze
   FOLDER_EXIST = "folder exist:".freeze
   FILE_EXIST = "file already exist:".freeze
   WRONG_RESPONSE = "Wrong command".freeze
@@ -37,4 +37,8 @@ module RocketApi
   INIT_FAIL = "Init action fail:".freeze
   CREATE_FAILED = "Create failed:".freeze
   CREATE_SUCCESS = "Successfully created:".freeze
+
+  # Text
+  TAB = "\s\s".freeze
+  DOUBLE_TAB = "\s\s\s\s".freeze
 end

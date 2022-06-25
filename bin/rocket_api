@@ -11,6 +11,11 @@ if [base_command, sub_command, project_name].map(&:nil?).any?
   return
 end
 
+unless RocketApi::CHECK_APPS.map { |p| Dir.glob(p) }.flatten.empty?
+  puts RocketApi::APP_DETECTED
+  return
+end
+
 case
 when RocketApi::AVAILABLE_COMMANDS.keys.include?(base_command)
   if RocketApi::AVAILABLE_COMMANDS[base_command].keys.include?(sub_command)
