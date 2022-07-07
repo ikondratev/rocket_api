@@ -2,6 +2,7 @@ module RocketApi
   module Commands
     module Dirs
       # @param [Array] dirs
+      # @raise [StandardError] error
       def create_repo(dirs)
         dirs.each do |dir|
           create_dir(dir)
@@ -11,8 +12,7 @@ module RocketApi
       end
 
       # @param [String] dir_name
-      # ...
-      # @raise [StandardError]
+      # @raise [StandardError] error
       def create_dir(dir_name)
         raise "#{RocketApi::FOLDER_EXIST} #{dir_name}" if is_exist?(dir_name)
 
