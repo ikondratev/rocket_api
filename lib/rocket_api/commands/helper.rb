@@ -2,6 +2,11 @@ module RocketApi
   module Commands
     module Helper
       # @param [String] name
+      def readme!(name)
+        create_single_file("README.md", readme_text(name))
+      end
+
+      # @param [String] name
       def bin!(name)
         create_single_file("bin/#{name}", "", exe: true)
       end
