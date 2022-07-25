@@ -4,7 +4,7 @@ module RocketApi
   CHECK_APPS = %w[*.gemspec *.ru].freeze
 
   # Valid commands
-  COMMANDS = { init: "init", gem: "gem", rack: "rack" }.freeze
+  COMMANDS = { init: "init", gem: "gem", rack: "rack", bot: "bot" }.freeze
 
   # Gem
   GEM_DIRS = %w[bin lib test].freeze
@@ -16,11 +16,17 @@ module RocketApi
   RACK_FILES = %w[rack_routes! rack_base_controller! rack_config_ru! gitignore! rack_app! rack_router! rack_initializers! rack_application! rack_gemfile!].freeze
   RACK_MAP = { init_dirs: RACK_DIRS, init_files: RACK_FILES }.freeze
 
+  # Bot
+  BOT_DIRS = %w[app bin config db test services].freeze
+  BOT_FILES = %w[readme!].freeze
+  BOT_MAP = { init_dirs: BOT_DIRS, init_files: BOT_FILES }.freeze
+
   # Dirs map
   AVAILABLE_COMMANDS = {
     COMMANDS[:init] => {
       COMMANDS[:gem] => GEM_MAP,
-      COMMANDS[:rack] => RACK_MAP
+      COMMANDS[:rack] => RACK_MAP,
+      COMMANDS[:bot] => BOT_MAP
     }
   }.freeze
 

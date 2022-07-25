@@ -16,6 +16,16 @@ module RocketApi
          "\s\stask.requires << 'rubocop-rake'",
          "end"].join("\n")
       end
+
+      def readme_text(project_name)
+        ["# #{project_name}",
+         "```sh",
+         "Add Product Version",
+         "```",
+         "```sh",
+         "Add description",
+         "```"].join("\n")
+      end
     end
   end
 end

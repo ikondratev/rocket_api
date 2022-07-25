@@ -6,7 +6,7 @@ base_command = ARGV[0]&.gsub(RocketApi::REGEXP_VALID, '')&.downcase
 sub_command  = ARGV[1]&.gsub(RocketApi::REGEXP_VALID, '')&.downcase
 project_name = ARGV[2]&.gsub(RocketApi::REGEXP_VALID, '')&.downcase
 
-if [base_command, sub_command, project_name].map(&:nil?).any?
+if [base_command, sub_command, project_name].any?(&:nil?)
   puts RocketApi::WRONG_RESPONSE
   return
 end
