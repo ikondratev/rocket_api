@@ -5,25 +5,25 @@ module RocketApi
     module RackRepoPlainText
       def rack_routes_text
         ["module Constants",
-         "\s\smodule Routes",
-         "\s\s\s\sPING = \"/ping.json\".freeze",
-         "\s\s\s\sMESSAGE_COUNT = \"/greeting.json\".freeze",
-         "\s\send",
+         "#{TAB}module Routes",
+         "#{DOUBLE_TAB}PING = \"/ping.json\".freeze",
+         "#{DOUBLE_TAB}MESSAGE_COUNT = \"/greeting.json\".freeze",
+         "#{TAB}end",
          "end"].join("\n")
       end
 
       def rack_base_controller_text
         ["class BaseController",
-         "\s\sdef initialize(request)",
-         "\s\s\s\s@request = request",
-         "\s\send\n",
-         "\s\sdef ping",
-         "\s\s\s\sbuild_response(\"pong\")",
-         "\s\send\n",
-         "\s\sprivate\n",
-         "\s\sdef build_response(body, status: 200)",
-         "\s\s\s\s[status, { \"Content-Type\" => \"text/json\" }, [body]]",
-         "\s\send",
+         "#{TAB}def initialize(request)",
+         "#{DOUBLE_TAB}@request = request",
+         "#{TAB}end\n",
+         "#{TAB}def ping",
+         "#{DOUBLE_TAB}build_response(\"pong\")",
+         "#{TAB}end\n",
+         "#{TAB}private\n",
+         "#{TAB}def build_response(body, status: 200)",
+         "#{DOUBLE_TAB}[status, { \"Content-Type\" => \"text/json\" }, [body]]",
+         "#{TAB}end",
          "end"].join("\n")
       end
 

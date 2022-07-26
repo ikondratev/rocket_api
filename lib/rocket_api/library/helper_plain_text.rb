@@ -8,12 +8,12 @@ module RocketApi
          "task default: %i[test rubocop]\n",
          "require 'rake/testtask'",
          "Rake::TestTask.new do |test|",
-         "\s\stest.libs << 'test'",
+         "#{TAB}test.libs << 'test'",
          "end\n",
          "require 'rubocop/rake_task'",
          "RuboCop::RakeTask.new do |task|",
-         "\s\stask.fail_on_error = true",
-         "\s\stask.requires << 'rubocop-rake'",
+         "#{TAB}task.fail_on_error = true",
+         "#{TAB}task.requires << 'rubocop-rake'",
          "end"].join("\n")
       end
 
