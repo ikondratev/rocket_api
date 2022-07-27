@@ -7,4 +7,7 @@ module RocketApi
 
   # Raise in case of file creation error
   class InitFilesError < Error; end
+
+  # Raise in case of validation error
+  class ValidationError < Error; end
 end

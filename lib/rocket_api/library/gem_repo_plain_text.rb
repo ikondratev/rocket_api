@@ -20,23 +20,23 @@ module RocketApi
          "require 'English'",
          "require '#{name}/version'\n",
          "Gem::Specification.new do |s|",
-         "\s\ss.specification_version = 2 if s.respond_to? :specification_version=",
-         "\s\sif s.respond_to? :required_rubygems_version=",
-         "\s\s\s\ss.required_rubygems_version = Gem::Requirement.new('>= 0')",
-         "\s\send",
-         "\s\ss.rubygems_version = 'RUBY_VERSION'",
-         "\s\ss.required_ruby_version = 'RUBY_VERSION'",
-         "\s\ss.name = '#{name}'",
-         "\s\ss.version = #{module_name}::VERSION",
-         "\s\ss.executables << '#{name}'",
-         "\s\ss.summary = 'PUT_SUMMARY'",
-         "\s\ss.description = 'PUT_DESCRIPTION'",
-         "\s\ss.authors = ['AUTHOR']",
-         "\s\ss.email = 'AUTHOR_MAIL'",
-         "\s\ss.homepage = 'https://github.com/...'",
-         "\s\ss.files = `git ls-files`.split($RS)",
-         "\s\ss.add_dependency \"rubocop\"",
-         "\s\ss.add_dependency \"rubocop-rake\"",
+         "#{TAB}s.specification_version = 2 if s.respond_to? :specification_version=",
+         "#{TAB}if s.respond_to? :required_rubygems_version=",
+         "#{DOUBLE_TAB}s.required_rubygems_version = Gem::Requirement.new('>= 0')",
+         "#{TAB}end",
+         "#{TAB}s.rubygems_version = 'RUBY_VERSION'",
+         "#{TAB}s.required_ruby_version = 'RUBY_VERSION'",
+         "#{TAB}s.name = '#{name}'",
+         "#{TAB}s.version = #{module_name}::VERSION",
+         "#{TAB}s.executables << '#{name}'",
+         "#{TAB}s.summary = 'PUT_SUMMARY'",
+         "#{TAB}s.description = 'PUT_DESCRIPTION'",
+         "#{TAB}s.authors = ['AUTHOR']",
+         "#{TAB}s.email = 'AUTHOR_MAIL'",
+         "#{TAB}s.homepage = 'https://github.com/...'",
+         "#{TAB}s.files = `git ls-files`.split($RS)",
+         "#{TAB}s.add_dependency \"rubocop\"",
+         "#{TAB}s.add_dependency \"rubocop-rake\"",
          "end"].join("\n")
       end
 
@@ -47,10 +47,10 @@ module RocketApi
         ["require 'minitest/autorun'",
          "require '#{name}/version'\n",
          "class TestVersion < Minitest::Test",
-         "\s\sinclude #{module_name}\n",
-         "\s\sdef test_ping",
-         "\s\s\s\sassert_equal(\"0.0.1\", #{module_name}::VERSION)",
-         "\s\send",
+         "#{TAB}include #{module_name}\n",
+         "#{TAB}def test_ping",
+         "#{DOUBLE_TAB}assert_equal(\"0.0.1\", #{module_name}::VERSION)",
+         "#{TAB}end",
          "end"].join("\n")
       end
 
@@ -65,12 +65,12 @@ module RocketApi
       # @return [String] text
       def plain_rubocop_yml_text(name)
         ["AllCops:",
-         "\s\sExclude:",
-         "\s\s\s\s- Gemfile",
-         "\s\s\s\s- test/*",
-         "\s\s\s\s- Rakefile",
-         "\s\s\s\s- #{name}.gemspec",
-         "\s\s\s\s- bin/*"].join("\n")
+         "#{TAB}Exclude:",
+         "#{DOUBLE_TAB}- Gemfile",
+         "#{DOUBLE_TAB}- test/*",
+         "#{DOUBLE_TAB}- Rakefile",
+         "#{DOUBLE_TAB}- #{name}.gemspec",
+         "#{DOUBLE_TAB}- bin/*"].join("\n")
       end
     end
   end
