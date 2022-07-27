@@ -2,32 +2,26 @@
 
 require "rocket_api"
 
-base_command = ARGV[0]&.gsub(RocketApi::REGEXP_VALID, '')&.downcase
-sub_command  = ARGV[1]&.gsub(RocketApi::REGEXP_VALID, '')&.downcase
-project_name = ARGV[2]&.gsub(RocketApi::REGEXP_VALID, '')&.downcase
+include RocketApi::Validation
+include RocketApi::Lib
 
-if [base_command, sub_command, project_name].any?(&:nil?)
-  puts RocketApi::WRONG_RESPONSE
-  return
-end
+base_command, sub_command, project_name = ARGV.map{|cmd| cmd&.gsub(RocketApi::REGEXP_VALID, '')&.downcase }
 
-unless RocketApi::CHECK_APPS.map { |p| Dir.glob(p) }.flatten.empty?
-  puts RocketApi::APP_DETECTED
-  return
-end
+safe("RocketApi") do
+  # validation block
+  validate_commands(base_command, sub_command, project_name)
+  available_to_init?
 
-case
-when RocketApi::AVAILABLE_COMMANDS.keys.include?(base_command)
-  if RocketApi::AVAILABLE_COMMANDS[base_command].keys.include?(sub_command)
-    RocketApi::AVAILABLE_COMMANDS[base_command][sub_command].each do |key, collection|
-      RocketApi::RocketCommands.send(key, collection: collection, project_name: project_name )
-    rescue RocketApi::Error => e
-      puts "#{RocketApi::INIT_DIR_ERROR} #{e.message}"
-      return
+  case
+  when RocketApi::AVAILABLE_COMMANDS.keys.include?(base_command)
+    if RocketApi::AVAILABLE_COMMANDS[base_command].keys.include?(sub_command)
+      RocketApi::AVAILABLE_COMMANDS[base_command][sub_command].each do |key, collection|
+        RocketApi::RocketCommands.send(key, collection: collection, project_name: project_name )
+      end
+    else
+      raise RocketApi::WRONG_RESPONSE
     end
   else
-    puts RocketApi::WRONG_RESPONSE
+    raise RocketApi::WRONG_RESPONSE
   end
-else
-  puts RocketApi::WRONG_RESPONSE
 end
