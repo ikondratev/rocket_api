@@ -41,8 +41,8 @@ module RocketApi
   WRONG_RESPONSE = "Wrong command".freeze
   EMPTY_NAME = "Project name is empty".freeze
   INIT_FAIL = "Init action fail:".freeze
-  CREATE_FAILED = "Create failed:".freeze
-  CREATE_SUCCESS = "Successfully created:".freeze
+  CREATE_FAILED = "Fail:".freeze
+  CREATE_SUCCESS = "Success:".freeze
 
   # Text
   TAB = "\s\s".freeze
