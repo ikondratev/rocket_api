@@ -23,8 +23,7 @@ module RocketApi
     def self.init_dirs(**options)
       create_repo(options[:collection])
     rescue StandardError => e
-      raise RocketApi::CreateDirError,
-            "#{RocketApi::CREATE_FAILED} #{e.message}"
+      raise RocketApi::CreateDirError, "#{RocketApi::CREATE_FAILED} #{e.message}"
     end
 
     # @param [Hash] options
@@ -33,8 +32,7 @@ module RocketApi
       project_name = options[:project_name]
       options[:collection].each { |command| send(command, project_name) }
     rescue StandardError => e
-      raise RocketApi::InitFilesError,
-            "#{RocketApi::INIT_FAIL} #{e.message}"
+      raise RocketApi::InitFilesError, "#{RocketApi::INIT_FAIL} #{e.message}"
     end
   end
 end
