@@ -11,7 +11,6 @@ module RocketApi
       end
 
       # @param [String] dir_name
-      # ...
       # @raise [StandardError]
       def create_dir(dir_name)
         raise "#{RocketApi::FOLDER_EXIST} #{dir_name}" if is_exist?(dir_name)
