@@ -14,7 +14,6 @@ module RocketApi
       # @param [String] name
       # @param [String] text
       # @param [Hash] options
-      # ...
       # @raise [StandardError] error
       def create_single_file(name, text, **options)
         raise "#{RocketApi::FILE_EXIST} #{name}" if is_exist?(name)
