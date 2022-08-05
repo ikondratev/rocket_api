@@ -1,7 +1,7 @@
+require "rocket_api/validation"
 module RocketApi
   # Valid input
-  REGEXP_VALID = /[^0-9A-Za-z_-]/.freeze
-  CHECK_APPS = %w[*.gemspec *.ru].freeze
+  CHECK_APPS = %w[*.gemspec *.ru README.md].freeze
 
   # Valid commands
   COMMANDS = { init: "init", gem: "gem", rack: "rack", bot: "bot" }.freeze
@@ -39,12 +39,48 @@ module RocketApi
   FOLDER_EXIST = "folder exist:".freeze
   FILE_EXIST = "file already exist:".freeze
   WRONG_RESPONSE = "Wrong command".freeze
+  WRONG_BASE_COMMAND = "Wrong init command".freeze
   EMPTY_NAME = "Project name is empty".freeze
+  EMPTY_FIELD = "Empty field".freeze
+  WRONG_TYPE = "Type is not required".freeze
   INIT_FAIL = "Init action fail:".freeze
   CREATE_FAILED = "Fail:".freeze
   CREATE_SUCCESS = "Success:".freeze
+  COMMANDS_IS_NOT_AVAILABLE = "One of the commands has mistake".freeze
 
   # Text
   TAB = "\s\s".freeze
   DOUBLE_TAB = "\s\s\s\s".freeze
+
+  class UserCommands
+    include RocketApi::Validation
+    attr_reader :init, :app, :name
+
+    REGEXP_VALID = /[^0-9A-Za-z_-]/.freeze
+    def initialize(init:, app:, name:)
+      @init = add_field(init)
+      @app = add_field(app)
+      @name = add_field(name)
+    rescue StandardError => e
+      raise RocketApi::InitCommandsError, e.message
+    end
+
+    # @return [Boolean]
+    def is_valid?
+      presence_check(RocketApi::AVAILABLE_COMMANDS, @init)
+      presence_check(RocketApi::AVAILABLE_COMMANDS[@init], @app)
+      true
+    rescue RocketApi::ValidationError
+      false
+    end
+
+    private
+
+    def add_field(filed)
+      raise RocketApi::WRONG_TYPE unless filed.is_a?(String)
+      raise RocketApi::EMPTY_FIELD if filed.nil?
+
+      filed&.gsub(REGEXP_VALID, '')&.downcase
+    end
+  end
 end
