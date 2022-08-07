@@ -5,9 +5,9 @@ require "rocket_api"
 include RocketApi::Validation
 include RocketApi::Lib
 
-commands = apply_commands(ARGV)
-
 safe("RocketApi") do
+  commands = apply_commands(ARGV)
+
   raise RocketApi::COMMANDS_IS_NOT_AVAILABLE unless commands.is_valid?
 
   check_possibility_to_init_dir

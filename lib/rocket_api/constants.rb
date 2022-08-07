@@ -57,6 +57,7 @@ module RocketApi
     attr_reader :init, :app, :name
 
     REGEXP_VALID = /[^0-9A-Za-z_-]/.freeze
+
     def initialize(init:, app:, name:)
       @init = add_field(init)
       @app = add_field(app)
