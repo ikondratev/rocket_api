@@ -3,14 +3,13 @@
 require "rocket_api"
 
 include RocketApi::Validation
-include RocketApi::Lib
+include RocketApi::Core
 
 safe("RocketApi") do
   commands = apply_commands(ARGV)
 
-  raise RocketApi::COMMANDS_IS_NOT_AVAILABLE unless commands.is_valid?
-
   check_possibility_to_init_dir
+  check_valid_commands(commands)
 
   RocketApi::AVAILABLE_COMMANDS[commands.init][commands.app].each do |key, collection|
     RocketApi::RocketCommands.send(key, collection: collection, project_name: commands.name )
