@@ -5,19 +5,14 @@ require "rocket_api"
 include RocketApi::Validation
 include RocketApi::Lib
 
-base_command, sub_command, project_name = ARGV.map{|cmd| cmd&.gsub(RocketApi::REGEXP_VALID, '')&.downcase }
-
 safe("RocketApi") do
-  validate_commands(base_command, sub_command, project_name)
-  available_to_init?
+  commands = apply_commands(ARGV)
 
-  raise RocketApi::WRONG_RESPONSE unless RocketApi::AVAILABLE_COMMANDS.keys.include?(base_command)
+  raise RocketApi::COMMANDS_IS_NOT_AVAILABLE unless commands.is_valid?
 
-  if RocketApi::AVAILABLE_COMMANDS[base_command].keys.include?(sub_command)
-    RocketApi::AVAILABLE_COMMANDS[base_command][sub_command].each do |key, collection|
-      RocketApi::RocketCommands.send(key, collection: collection, project_name: project_name )
-    end
-  else
-    raise RocketApi::WRONG_RESPONSE
+  check_possibility_to_init_dir
+
+  RocketApi::AVAILABLE_COMMANDS[commands.init][commands.app].each do |key, collection|
+    RocketApi::RocketCommands.send(key, collection: collection, project_name: commands.name )
   end
 end
