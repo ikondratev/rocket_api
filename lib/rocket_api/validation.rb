@@ -15,5 +15,13 @@ module RocketApi
     rescue StandardError => e
       raise RocketApi::ValidationError, e.message
     end
+
+    # @param [RocketApi::UserCommands] commands
+    # @raise [RocketApi::ValidationError]
+    def check_valid_commands(commands)
+      raise RocketApi::COMMANDS_IS_NOT_AVAILABLE unless commands.is_valid?
+    rescue StandardError => e
+      raise RocketApi::ValidationError, e.message
+    end
   end
 end

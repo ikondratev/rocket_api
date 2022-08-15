@@ -1,5 +1,5 @@
 module RocketApi
-  module Lib
+  module Core
     # @param [String] category
     def safe(category)
       yield

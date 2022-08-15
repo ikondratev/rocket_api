@@ -1,9 +1,9 @@
-require "rocket_api/lib"
+require "rocket_api/core"
 require "rocket_api/errors"
 require "rocket_api/constants"
 
-RSpec.describe RocketApi::Lib do
-  include RocketApi::Lib
+RSpec.describe RocketApi::Core do
+  include RocketApi::Core
   describe "#apply_commads" do
     context "in case of non empty commands" do
       let(:commands) do
