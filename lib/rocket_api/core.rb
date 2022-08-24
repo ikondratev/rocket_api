@@ -12,7 +12,7 @@ module RocketApi
     # @param [Array] avg_commands
     # @return [RocketApi::UserCommands]
     # @raise [RocketApi::ApplyCommandsError]
-    def apply_commands(avg_commands)
+    def extract_commands(avg_commands)
       RocketApi::UserCommands.new(
         init: avg_commands[0],
         app: avg_commands[1],
