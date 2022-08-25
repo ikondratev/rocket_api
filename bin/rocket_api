@@ -6,7 +6,7 @@ include RocketApi::Validation
 include RocketApi::Core
 
 safe("RocketApi") do
-  commands = apply_commands(ARGV)
+  commands = extract_commands(ARGV)
 
   check_possibility_to_init_dir
   check_valid_commands(commands)
