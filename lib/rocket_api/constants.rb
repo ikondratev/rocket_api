@@ -4,7 +4,7 @@ module RocketApi
   CHECK_APPS = %w[*.gemspec *.ru README.md].freeze
 
   # Valid commands
-  COMMANDS = { init: "init", gem: "gem", rack: "rack", bot: "bot" }.freeze
+  COMMANDS = { init: "init", gem: "gem", rack: "rack", bot: "bot", shassi: "shassi" }.freeze
 
   # Gem
   GEM_DIRS = %w[bin lib test].freeze
@@ -21,12 +21,18 @@ module RocketApi
   BOT_FILES = %w[readme!].freeze
   BOT_MAP = { init_dirs: BOT_DIRS, init_files: BOT_FILES }.freeze
 
+  # Shassi
+  SHASSI_DIRS = %w[app bin config db rakelib spec].freeze
+  SHASSI_FILES = %w[shassi_config_ru! shassi_gemfile! shassi_rake_file!].freeze
+  SHASSI_MAP = { init_dirs: SHASSI_DIRS, init_files: SHASSI_FILES }.freeze
+
   # Dirs map
   AVAILABLE_COMMANDS = {
     COMMANDS[:init] => {
       COMMANDS[:gem] => GEM_MAP,
       COMMANDS[:rack] => RACK_MAP,
-      COMMANDS[:bot] => BOT_MAP
+      COMMANDS[:bot] => BOT_MAP,
+      COMMANDS[:shassi] => SHASSI_MAP
     }
   }.freeze
 
@@ -79,7 +85,7 @@ module RocketApi
 
     def add_field(filed)
       raise RocketApi::WRONG_TYPE unless filed.is_a?(String)
-      raise RocketApi::EMPTY_FIELD if filed.nil?
+      raise RocketApi::EMPTY_FIELD if filed.empty?
 
       filed&.gsub(REGEXP_VALID, '')&.downcase
     end

@@ -14,9 +14,9 @@ module RocketApi
     # @raise [RocketApi::ApplyCommandsError]
     def extract_commands(avg_commands)
       RocketApi::UserCommands.new(
-        init: avg_commands[0],
-        app: avg_commands[1],
-        name: avg_commands[2]
+        init: avg_commands[0].to_s,
+        app: avg_commands[1].to_s,
+        name: avg_commands[2].to_s
       )
     rescue  RocketApi::Error, StandardError => e
       raise RocketApi::ApplyCommandsError, e.message

@@ -3,9 +3,11 @@ require "rocket_api/commands/dirs"
 require "rocket_api/commands/gems_dir"
 require "rocket_api/commands/helper"
 require "rocket_api/commands/rack_dir"
+require "rocket_api/commands/shassi_dir"
 require "rocket_api/library/gem_repo_plain_text"
 require "rocket_api/library/rack_repo_plain_text"
 require "rocket_api/library/helper_plain_text"
+require "rocket_api/library/shassi_repo_plain_text"
 
 module RocketApi
   class RocketCommands
@@ -14,9 +16,11 @@ module RocketApi
     extend RocketApi::Commands::Helper
     extend RocketApi::Commands::GemsDir
     extend RocketApi::Commands::RackDir
+    extend RocketApi::Commands::ShassiDir
     extend RocketApi::Library::HelperPlainText
     extend RocketApi::Library::GemRepoPlainText
     extend RocketApi::Library::RackRepoPlainText
+    extend RocketApi::Library::ShassiRepoPlainText
 
     # @param [Hah] options
     # @raise [RocketApi::CreateDirError]
